@@ -1,3 +1,7 @@
+package landonmars2;
+
+import graph.Node;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,8 +10,9 @@ public class MainForTest {
     public static void main(String... args) {
         //test_OverGround();
         //test_CalculatePowerAndRotation();
-        test_ExploreNextSolution_Easy();
+        //test_ExploreNextSolution_Easy();
         //test_ExploreNextSolution();
+        test_CalculateDistance();
     }
 
     private static List<Player.Coordinate> coordinates = new ArrayList<>();
@@ -43,10 +48,10 @@ public class MainForTest {
         System.out.println("Method - test_OverGround");
         test_ConvertToZoneList();
 
-        System.out.println("[500,1000] is over ground : " + Player.Calculator.isOverGround(new Player.PreciseCoordinate(500, 1000), zones));
-        System.out.println("[2000,1000] is over ground : " + Player.Calculator.isOverGround(new Player.PreciseCoordinate(2000, 1000), zones));
-        System.out.println("[3500,1000] is over ground : " + Player.Calculator.isOverGround(new Player.PreciseCoordinate(3500, 1000), zones));
-        System.out.println("[5000,1000] is over ground : " + Player.Calculator.isOverGround(new Player.PreciseCoordinate(5000, 1000), zones));
+        //System.out.println("[500,1000] is over ground : " + landonmars2.Player.Calculator.isOverGround(new landonmars2.Player.PreciseCoordinate(500, 1000), zones));
+        //System.out.println("[2000,1000] is over ground : " + landonmars2.Player.Calculator.isOverGround(new landonmars2.Player.PreciseCoordinate(2000, 1000), zones));
+        //System.out.println("[3500,1000] is over ground : " + landonmars2.Player.Calculator.isOverGround(new landonmars2.Player.PreciseCoordinate(3500, 1000), zones));
+        //System.out.println("[5000,1000] is over ground : " + landonmars2.Player.Calculator.isOverGround(new landonmars2.Player.PreciseCoordinate(5000, 1000), zones));
     }
 
     public static void test_SplitVector() {
@@ -85,9 +90,9 @@ public class MainForTest {
         myData.setAimedRotation(-10);
         myData.setActualPower(0);
         myData.setAimedPower(3);
-        while (Player.Calculator.isOverGround(myData.getCurrentPosition(), zones)) {
-            myData = Player.Calculator.calculateNextData(myData);
-        }
+        /*while (landonmars2.Player.Calculator.isOverGround(myData.getCurrentPosition(), zones)) {
+            myData = landonmars2.Player.Calculator.calculateNextData(myData);
+        }*/
     }
 
     public static void test_EstimateLandingData() {
@@ -128,9 +133,9 @@ public class MainForTest {
 
         Player.Coordinate landingCoordinate = new Player.Coordinate(((landZone.getStart().getX() + landZone.getEnd().getX()) / 2), landZone.getStart().getY());
 
-        while (Player.Calculator.isOverGround(myData.getCurrentPosition(), zones)) {
-            Player.Calculator.calculatePowerAndRotation(landingCoordinate, myData);
-        }
+        /*while (landonmars2.Player.Calculator.isOverGround(myData.getCurrentPosition(), zones)) {
+            landonmars2.Player.Calculator.calculatePowerAndRotation(landingCoordinate, myData);
+        }*/
 
 
         System.out.println(myData.toString());
@@ -170,5 +175,24 @@ public class MainForTest {
         myData.setAimedPower(0);
 
         Player.Calculator.exploreNextSolution(myData, null, landingCoordinate, zones);
+    }
+
+    public static void test_CalculateDistance() {
+        Node n1 = new Node();
+        n1.setX(0);
+        n1.setY(0);
+
+        Node n2 = new Node();
+        n2.setX(4);
+        n2.setY(0);
+
+        double d = DistanceUtils.calculateDistance(n1, n2);
+
+        n1.setX(1);
+        n1.setY(2);
+        n2.setX(4);
+        n2.setY(-2);
+
+        d = DistanceUtils.calculateDistance(n1, n2);
     }
 }
